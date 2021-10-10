@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service1_deployment
+spec:
+  selector:
+    matchLabels:
+      app: service1
+      tier: backend
+      track: stable
+  replicas: 7
+  template:
+    metadata:
+      labels:
+        app: service1
+        tier: backend
+        track: stable
+    spec:
+      containers:
+        - name: back
+          image: "service:1.0"
+          ports:
+            - name: http
+              containerPort: 90

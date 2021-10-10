@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 
 app.get('/', () => {
-  console.log('service 1 impact');
+  console.log('service 1 is working');
 });
 
 app.listen(8080, () => {
