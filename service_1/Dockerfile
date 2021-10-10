@@ -1,12 +1,14 @@
-FROM node:lts
-
-WORKDIR ./
-
-COPY package*.json ./
-
+FROM node:alpine
+WORKDIR /client
+COPY package.json ./
+COPY package-lock.json ./
 RUN npm install
-
 COPY . .
+RUN npm run build
 
-EXPOSE 8080
-CMD [ "npm", "run", "start" ]
+#run
+FROM nginx:stable-alpine
+COPY --from=build /client/build /usr/share/nginx/html
+
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
