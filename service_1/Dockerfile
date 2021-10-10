@@ -1,14 +1,13 @@
 FROM node:alpine
-WORKDIR /client
+
+WORKDIR /app
+
 COPY package.json ./
+
 COPY package-lock.json ./
-RUN npm install
-COPY . .
-RUN npm run build
 
-#run
-FROM nginx:stable-alpine
-COPY --from=build /client/build /usr/share/nginx/html
+COPY ./ ./
 
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+RUN npm i
+
+CMD ["npm", "run", "start"]
