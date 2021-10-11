@@ -1,24 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service1_deployment
+  name: service1
 spec:
   selector:
     matchLabels:
       app: service1
-      tier: backend
-      track: stable
-  replicas: 7
+  replicas: 1
   template:
     metadata:
       labels:
         app: service1
-        tier: backend
-        track: stable
     spec:
       containers:
-        - name: back
-          image: "service:1.0"
+        - name: service1
+          image: service1
+          imagePullPolicy: Never
           ports:
-            - name: http
-              containerPort: 90
+            - containerPort: 8080
