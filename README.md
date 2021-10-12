@@ -6,7 +6,7 @@ Team:
 * [ Євген Коваленко ](https://github.com/JohnyKovalenko1337)
 * [ Денис Коваленко ](https://github.com/Den-Kov59)
 
-
+# Хід роботи
 1. Спочатку ми бідлимо наш докер файл для бекенду
 ![alt text](https://raw.githubusercontent.com/JohnyKovalenko1337/images/master/Screenshot_92.png)
 
@@ -40,8 +40,7 @@ Team:
 8. Клієнт також збілдився та запустився, тому все ок
 ![alt text](https://raw.githubusercontent.com/JohnyKovalenko1337/images/master/Screenshot_101.png)
 
-9. Щоб запустити наші сервіси за допомогою ```ingress``` спочатку застосуємо його аддон  
-в ```minikube```
+9. Щоб запустити наші сервіси за допомогою ```ingress``` спочатку застосуємо його аддон в ```minikube```
 ![alt text](https://raw.githubusercontent.com/JohnyKovalenko1337/images/master/Screenshot_98.png)
 
 
@@ -53,4 +52,4 @@ Team:
 ![alt text](https://raw.githubusercontent.com/JohnyKovalenko1337/images/master/Screenshot_102.png)
 ![alt text](https://raw.githubusercontent.com/JohnyKovalenko1337/images/master/Screenshot_103.png)
 
-Як бачимо клієнт та сервіс працюють добре 
+Як показано на скріншоті клієнт та сервіс працюють добре, поставлена мета лабороторної роботи була виконана
