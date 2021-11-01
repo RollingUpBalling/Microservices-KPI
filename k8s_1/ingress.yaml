@@ -12,7 +12,14 @@ spec:
               service:
                 name: service1-service # ім'я сервісу
                 port:
-                  number: 8080           # порт на якому запущено сервіс
+                  number: 80
+          - path: /api/service3        # шлях по якому відбувається перенаправлення на сервіс
+            pathType: Prefix           # все, що починається з `/api` буде направлено на сервіс demo-service. Альтернативно можна використовувати `Exact` та `ImplementationSpecific`
+            backend:
+              service:
+                name: service3-service # ім'я сервісу
+                port:
+                  number: 80
           - path: /
             pathType: Prefix
             backend:

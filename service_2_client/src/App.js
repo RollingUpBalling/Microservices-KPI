@@ -8,16 +8,17 @@ function App() {
   const [secondString, setSecondString] = useState('loading...');
 
   useEffect(() => {
-    const firstRequest = axios.get('http://localhost:3001');
-    const secondRequest = axios.get('http://localhost:3002');
+    const firstRequest = axios.get('http://192.168.39.159/api/service1');
+    const secondRequest = axios.get('http://192.168.39.159/api/service3/check');
 
     Promise.all([firstRequest, secondRequest])
       .then((response) => {
         // put into next two strings a response from each request replacing numbers
-        setFirstString('123');
-        setSecondString('321');
+        setFirstString(response[0].message);
+        setSecondString(response[1].message);
       })
       .catch((err) => {
+          console.log(err);
         setFirstString('error');
         setSecondString('error');
       });
