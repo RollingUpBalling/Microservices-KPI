@@ -10,12 +10,12 @@ function App() {
   useEffect(() => {
     const firstRequest = axios.get('http://192.168.39.159/api/service1');
     const secondRequest = axios.get('http://192.168.39.159/api/service3/check');
-
+    console.log('here');
     Promise.all([firstRequest, secondRequest])
       .then((response) => {
         // put into next two strings a response from each request replacing numbers
-        setFirstString(response[0].message);
-        setSecondString(response[1].message);
+        setFirstString(response[0].data.message);
+        setSecondString(response[1].data.message);
       })
       .catch((err) => {
           console.log(err);
