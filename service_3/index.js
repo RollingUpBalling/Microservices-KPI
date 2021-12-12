@@ -1,41 +1,46 @@
 const express = require('express');
+const {Sequelize, DataTypes} = require('sequelize');
+ //'postgres://demo:demo@10.109.167.239:5432/demo';
 
 const app = express();
 
-var status = 'ok';
+const { Kafka } = require('kafkajs')
 
-/*app.use(function(req,res,next){
-  console.log(status);
-  if(status !== 'ok'){
-    setTimeout(next(),10000)}
-  }
+const kafka = new Kafka({
 
-);*/
+    clientId: 'my-app',
 
+    brokers: ['10.98.204.179:9092']
 
-app.get('/api/service3/broke', (req, res) => {
-  console.log('service 3 is working');
-  status = 'not ok'
-  return res.json({message: 'status change to not ok'});
-});
-
-app.get('/api/service3/fix', (req, res) => {
-  console.log('service 3 is working');
-  status = 'ok'
-  return res.json({message: 'status change to ok'});
 });
 
 
-app.get('/api/service3/check', (req, res, next) => {
-  if(status !== 'ok'){
-    return setTimeout(()=> {
-      console.log('service 3 is working');
-      res.json({message: 'hello from service 3 with delay 10 sec'});
-    }, 10000)
-  }
-  return res.json({message: 'hello from service 3'});
+const sequelize = new Sequelize('postgres://demo:demo@10.109.167.239:5432/demo', {
+    dialect: 'postgres'
 });
 
-app.listen(8090, () => {
-  console.log('service 3 run in 8090 port');
+
+app.get('/api/service3/send-message', async (req, res, next) => {
+    const query = req.query.message;
+
+
+    return res.json({message: 'success'});
 });
+
+app.get('/api/service3/get', async (req, res, next) => {
+
+    const results = await sequelize.query('SELECT "id", "message", "createdAt", "updatedAt" FROM "results";');
+
+    return res.json({message: 'success', results: results[0]});
+});
+
+sequelize.authenticate().then(() => {
+    sequelize.query('CREATE TABLE IF NOT EXISTS results (\n' +
+        'id uuid constraint result_pkey primary key,' +
+        'message  varchar(255)' +
+        ');').then(r => app.listen(8090, () => {
+        console.log('service 3 run in 8090 port');
+    }))
+}).catch(e => {console.log(e)});
+
+
